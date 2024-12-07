@@ -1,6 +1,15 @@
 /*
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
+ * @Date: 2024-12-07 12:45:35
+ * @LastEditTime: 2024-12-07 12:45:40
+ * @FilePath: /code/blog/web/env.d.ts
+ * @Description: 
+ * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
+ */
+/*
+ * @Author: taxcoder 1571922819@qq.com
+ * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2024-12-07 12:14:20
  * @LastEditTime: 2024-12-07 12:34:06
  * @FilePath: /code/blog/web/src/vite-env.d.ts
