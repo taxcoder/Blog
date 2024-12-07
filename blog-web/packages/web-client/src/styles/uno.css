@@ -1,0 +1,57 @@
+@unocss preflights;
+@unocss default;
+
+.flex-center {
+  @apply important-flex important-items-center important-justify-center;
+}
+
+.side-button {
+  @apply important-w-[35px] important-h-[35px] important-rounded-[5px] important-mb-[5px] important-border-none;
+
+  &:hover {
+    @apply important-border-none important-bg-[#ff7242];
+  }
+}
+
+.dark .side-button {
+  --el-button-bg-color: #535353;
+}
+
+.icon {
+  @apply w-[1rem] h-[1em] fill-current overflow-hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .side-button {
+    @apply important-w-[30px] important-h-[30px];
+  }
+}
+
+.sakura {
+  font-family: sakura, sans-serif;
+}
+
+.foot-p {
+  @apply h-[2.5rem] grid items-center grid-rows-2 text-center lg:grid-cols-2;
+}
+
+.foot-span {
+  @apply py-0 px-[5px] inline-block  text-[0.95rem];
+}
+
+.search-height {
+  height: calc(calc(90vh / var(--zoom)) - 53px - 40px - 92px - 15px);
+}
+
+.search-height-all {
+  height: calc(calc(100vh / var(--zoom)) - 53px - 40px - 92px - 15px);
+}
+
+.dis-scroll {
+  & {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+@unocss;

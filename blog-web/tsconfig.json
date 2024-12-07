@@ -1,0 +1,17 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "typescript-vue-tsc",
+        "types": ["volar"],
+        "config": {}
+      }
+    ]
+  },
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}

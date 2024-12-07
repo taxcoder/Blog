@@ -1,0 +1,66 @@
+server:
+  port: 7070
+  # 传递的数据强制转换成UTF-8
+  servlet:
+    encoding:
+      force: true
+# redis
+
+spring:
+  data:
+    redis:
+      ## 链接主机地址
+      host: 127.0.0.1
+      ## 链接端口号
+      port: 6379
+      ## redis库，有16个
+      database: 1
+      ## redis密码
+      password:
+      ## 超时时间6s
+      timeout: 6000
+      jedis:
+        pool:
+          ## 没有超时时间
+          max-wait: -1
+          ## 最大激活的线程数
+          max-active: 8
+          ## 最大的空闲的线程数
+          max-idle: 10
+          ## 最小的空闲的线程数
+          min-idle: 2
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: ENC(0dOeF9KoJrxTY3iNIOi1MCrVg+eZQSTY5nGHQ5vbfEX9ogKrgPLrBy6sg9EvldFPYHGl6ABq5aCUgHLVpuGCzdiyLNvIOMbTPwJRilTs0O6FHI9Up1q8Gz98PuA5u84JVFPOHoL97ngHdf2CH/C6Np9qAjs1H46NjlHW2Piuzj31PN0aglxyxloZo3bRExZ+cVfN4YPNgqqQRJRBc7wTpRe/vTtI7GwFtCmXKnn5YlKEALjtR4/oEvEim88MQ860CxcFdMwo9z9wHzpAFRvMgs0aPt/Kw1evgv3wQ4PUEto=)
+    username: ENC(D9zZ+VyLtnstUpXrgNYdiIZguxWcw5lrha7f9hZyf/Pj14dhYhKE6W1ljyWOvkO7)
+    password: ENC(6gSkJy2pQ3nQR9rA1WZR6VbhOnQXqx95OrntKqcCBK2r8QkRPQqUtRcP52zOixQu)
+    # hikari
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 5
+      maximum-pool-size: 15
+      max-lifetime: 1200000
+      idle-timeout: 300000
+      auto-commit: true
+# mybatis-plus
+mybatis-plus:
+  type-aliases-package: com.tanx.blog.entity.po
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: enable
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+springdoc:
+  swagger-ui:
+    path: /index.html
+    #当 persistAuthorization 参数设置为 true 时，客户端会将授权信息保存在本地存储中，以便在下次访问时自动使用该授权信息。
+    #如果设置为 false，则客户端不会保存授权信息，需要在每次访问时重新进行授权。
+    persistAuthorization: false
+    # 根据HTTP对路径进行排序
+    operationsSorter: method

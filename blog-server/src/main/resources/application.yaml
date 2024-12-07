@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: @profile.active@
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+application:
+  security:
+    jwt:
+      secret-key: ENC(tqb5KMxjvubmQwrA4RUwF4g9ej8aHXCGUC5mhaRjW8Mv4crVJq/o23Z1Uvkb2THVjUqjyJOHaSeREY9I3WDAL9vPlyUuWVMy28Payu2sv6pXV36uNG09J0NLF/cNpMcwva0WjiFLrlMdAJ3P5H6qSQ==)
+# 1天
+      expiration: 86400000
+# 7天
+      refresh-token:
+        expiration: 604800000
+      temp-token:
+        expiration: 7200000

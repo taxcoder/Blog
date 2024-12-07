@@ -1,0 +1,10 @@
+{
+  "name": "@tanxiang/common",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@ant-design/icons-vue": "^7.0.1"
+  }
+}

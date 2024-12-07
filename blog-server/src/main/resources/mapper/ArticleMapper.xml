@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tanx.blog.mapper.ArticleMapper">
+
+    <resultMap id="BaseResultMap" type="com.tanx.blog.entity.po.Article">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="classificationId" column="classification_id" jdbcType="INTEGER"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="image" column="image" jdbcType="VARCHAR"/>
+        <result property="contentUrl" column="content_url" jdbcType="VARCHAR"/>
+        <result property="prefixContent" column="prefix_content" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,classification_id,title,
+        image,contentUrl,prefix_content,
+        create_time,update_time
+    </sql>
+
+    <select id="limitArticleDto" resultType="com.tanx.blog.entity.dto.ArticleDto" resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        address,
+        content_url,
+        like_count,
+        look_count,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        like_count,
+        look_count,
+        content_url,
+        prefix_content,
+        create_time,
+        update_time,
+        address
+        from b_article where recovery = #{recovery}
+        order by is_top desc, create_time desc)
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+
+    <select id="selectArticleById" resultType="com.tanx.blog.entity.dto.ArticleDto" resultMap="limitArticleDtoMap">
+        select
+        ba.classification_id,ba.id,ba.title,is_top,image,prefix_content,ba.create_time,ba.update_time,ba.like_count,look_count,address,
+        bc.id as classification_id,bc.name as classification_name,
+        bt.id as tag_id,bt.name as tag_name,
+        sws.user_name as author
+        from (select
+        id,classification_id,is_top,like_count,look_count,address,title,image,prefix_content,content_url,create_time,update_time
+        from b_article where id = #{id})
+        as ba,
+        b_classification bc,b_tag bt,r_article_tag rat,s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id and bt.id = rat.tag_id
+    </select>
+
+    <select id="limitArchivedDto" resultType="com.tanx.blog.entity.dto.ArticleDto">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        like_count,
+        look_count,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        like_count,
+        look_count,
+        prefix_content,
+        create_time,
+        update_time
+        from b_article where recovery = false
+        order by is_top desc, create_time desc)
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+
+    <select id="limitTagArticle" resultType="com.tanx.blog.entity.dto.ArticleDto" resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_tag bt,
+        r_article_tag rat
+        where ba.id = rat.article_id
+        and rat.tag_id = bt.id
+        and bt.id = #{id}
+        and recovery = false
+        order by is_top desc, ba.create_time desc)
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+    <select id="limitClassificationArticle" resultType="com.tanx.blog.entity.dto.ArticleDto"
+            resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and ba.classification_id = #{id}
+        and recovery = false
+        order by is_top desc, ba.create_time desc)
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+    <select id="searchDataById" resultType="com.tanx.blog.entity.dto.ArticleDto" resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        ba.address,
+        content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and LOCATE(#{searchValue}, ba.id) > 0
+        and recovery = #{recovery}
+        order by is_top desc, ba.create_time desc
+        limit #{current},#{size})
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+    <select id="searchDataLikeTitle" resultType="com.tanx.blog.entity.dto.ArticleDto" resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        ba.address,
+        content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and LOCATE(#{searchValue}, title) > 0
+        and recovery = #{recovery}
+        order by is_top desc, ba.create_time desc
+        limit #{current},#{size})
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+    <select id="searchDataByLikeCountEqual" resultType="com.tanx.blog.entity.dto.ArticleDto"
+            resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        ba.address,
+        content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and like_count = #{searchValue}
+        and recovery = #{recovery}
+        order by is_top desc, ba.create_time desc
+        limit #{current},#{size})
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+    <select id="searchDataByLikeCountEqualOrLessThan" resultType="com.tanx.blog.entity.dto.ArticleDto"
+            resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        address,
+        content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and like_count &lt;= #{searchValue}
+        and recovery = #{recovery}
+        order by is_top desc, ba.create_time desc
+        limit #{current},#{size})
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+    <select id="searchDataByLikeCountEqualOrGreaterThan" resultType="com.tanx.blog.entity.dto.ArticleDto"
+            resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        address,
+        content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and like_count &gt;= #{searchValue}
+        and recovery = #{recovery}
+        order by is_top desc, ba.create_time desc
+        limit #{current},#{size})
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+    <select id="searchDataLikeClassificationId" resultType="com.tanx.blog.entity.dto.ArticleDto"
+            resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        address,
+        content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and LOCATE(#{searchValue},bc.id) > 0
+        and recovery = #{recovery}
+        order by is_top desc, ba.create_time desc limit #{current},#{size})
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+    <select id="searchDataLikeClassificationName" resultType="com.tanx.blog.entity.dto.ArticleDto"
+            resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        address,
+        content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and LOCATE(#{searchValue},bc.name) > 0
+        and recovery = #{recovery}
+        order by is_top desc, ba.create_time desc limit #{current},#{size})
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+    <select id="searchDataPosition" resultType="com.tanx.blog.entity.dto.ArticleDto">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        address,
+        content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and LOCATE(#{searchValue},ba.address) > 0
+        and recovery = #{recovery}
+        order by is_top desc, ba.create_time desc limit #{current},#{size})
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        order by ba.is_top desc
+    </select>
+
+    <select id="searchDataByTagName" resultType="com.tanx.blog.entity.dto.ArticleDto" resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        address,
+        content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and recovery = false
+        order by is_top desc, ba.create_time desc)
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        and LOCATE(#{searchValue},bt.name) > 0
+    </select>
+
+    <select id="searchDataByTagId" resultType="com.tanx.blog.entity.dto.ArticleDto" resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        address,
+        content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and recovery = false
+        order by is_top desc, ba.create_time desc)
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        and LOCATE(#{searchValue},bt.id) > 0
+    </select>
+    <select id="tagArticleList" resultType="com.tanx.blog.entity.dto.ArticleDto" resultMap="limitArticleDtoMap">
+        select ba.classification_id,
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        like_count,
+        look_count,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        like_count,
+        look_count,
+        prefix_content,
+        create_time,
+        update_time
+        from b_article where recovery = false
+        order by is_top desc, create_time desc)
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        and bt.id = #{id}
+        order by ba.is_top desc
+    </select>
+    <select id="selectArticle" resultType="com.tanx.blog.mapper.ArticleMapper" resultMap="limitArticleDtoMap">
+        select * from b_article where LOCATE(#{searchKey}, title) or LOCATE(#{searchKey}, prefix_content) limit
+        #{current},#{size}
+    </select>
+    <select id="selectArticleTotal" resultType="java.lang.Long">
+        select count(id) from b_article where LOCATE(#{searchKey}, title) or LOCATE(#{searchKey}, prefix_content)
+    </select>
+    <select id="selectArticleCompositeSearch" resultType="com.tanx.blog.entity.dto.ArticleDto"
+            resultMap="limitArticleDtoMap">
+        select
+        ba.id,
+        ba.title,
+        is_top,
+        image,
+        address,
+        content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time,
+        bc.id as classification_id,
+        bc.name as classification_name,
+        bt.id as tag_id,
+        bt.name as tag_name,
+        sws.user_name as author
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and recovery = false
+        order by is_top desc, ba.create_time desc)
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        <if test="tagName != null">
+            and LOCATE(#{tagName}, bt.name)
+        </if>
+        <if test="classificationName != null">
+            and LOCATE(#{classificationName}, bc.name)
+        </if>
+        <if test="content != null">
+            and (LOCATE(#{content},ba.title) or LOCATE(#{content}, ba.prefix_content))
+        </if>
+        limit #{current},#{size}
+    </select>
+    <select id="selectArticleCompositeTotal" resultType="java.lang.Long">
+        select
+        count(ba.id)
+        from (select ba.id,
+        classification_id,
+        is_top,
+        title,
+        image,
+        address,
+        ba.content_url,
+        prefix_content,
+        ba.create_time,
+        ba.update_time
+        from b_article ba,
+        b_classification bc
+        where ba.classification_id = bc.id
+        and recovery = false
+        order by is_top desc, ba.create_time desc)
+        as ba,
+        b_classification bc,
+        b_tag bt,
+        r_article_tag rat,
+        s_web_station sws
+        where bc.id = ba.classification_id
+        and ba.id = rat.article_id
+        and bt.id = rat.tag_id
+        <if test="tagName != null">
+            and LOCATE(#{tagName}, bt.name)
+        </if>
+        <if test="classificationName != null">
+            and LOCATE(#{classificationName}, bc.name)
+        </if>
+        <if test="content != null">
+            and (LOCATE(#{content},ba.title) or LOCATE(#{content}, ba.prefix_content))
+        </if>
+    </select>
+    <select id="searchDataList" resultType="com.tanx.blog.entity.dto.ArticleDto" resultMap="limitArticleDtoMap">
+        select ba.id,
+        <if test="sort == 1">
+            ANY_VALUE(bc.id) as classification_id,
+            ANY_VALUE(bc.name) as classification_name,
+            ANY_VALUE(sws.user_name) as author,
+            ANY_VALUE( sws.head_icon),
+            sum(ba.look_count + ba.like_count) as count,
+        </if>
+        <if test="sort != 1">
+            bc.id as classification_id,
+            bc.name as classification_name,
+            sws.user_name as author,
+            sws.head_icon,
+        </if>
+        ba.image,
+        sws.head_icon,
+        title,
+        prefix_content,
+        like_count,
+        ba.create_time
+        from blog.b_article ba,
+        blog.b_classification bc,
+        blog.s_web_station sws
+        where recovery = false
+        and ba.classification_id = bc.id
+        and (LOCATE(#{value}, ba.title) or LOCATE(#{value}, ba.prefix_content))
+        <if test="sort == -1">
+            <if test="time != -1">
+                and DATEDIFF(curdate(), ba.create_time) &lt;= #{time} order by ba.create_time asc
+            </if>
+            <if test="time == -1">
+                order by ba.create_time asc
+            </if>
+        </if>
+        <if test="sort == 0">
+            <if test="time != -1">
+                and DATEDIFF(curdate(), ba.create_time) &lt;= #{time} order by ba.create_time desc
+            </if>
+            <if test="time == -1">
+                order by ba.create_time desc
+            </if>
+        </if>
+        <if test="sort == 1">
+            <if test="time != -1">
+                and DATEDIFF(curdate(), ba.create_time) &lt;= #{time} group by ba.id order by count desc
+            </if>
+            <if test="time == -1">
+                group by ba.id order by count desc
+            </if>
+        </if>
+    </select>
+
+    <resultMap id="limitArticleDtoMap" type="com.tanx.blog.entity.dto.ArticleDto">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="image" property="image"/>
+        <result column="is_top" property="top"/>
+        <result column="author" property="author"/>
+        <result column="look_count" property="lookCount"/>
+        <result column="like_count" property="likeCount"/>
+        <result column="prefix_content" property="prefixContent"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="remove_time" property="removeTime"/>
+        <result column="address" property="address"/>
+        <result column="head_icon" property="headIcon"/>
+        <result column="content_url" property="contentUrl"/>
+        <collection property="classification" ofType="com.tanx.blog.entity.dto.ClassificationDto">
+            <id column="classification_id" property="id"/>
+            <result column="classification_name" property="name"/>
+        </collection>
+        <collection property="tag" ofType="com.tanx.blog.entity.dto.TagDto">
+            <id column="tag_id" property="id"/>
+            <result column="tag_name" property="name"/>
+        </collection>
+    </resultMap>
+</mapper>

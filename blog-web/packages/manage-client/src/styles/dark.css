@@ -1,0 +1,6 @@
+.dark {
+  --page-light: 70%;
+  background-color: #21252b;
+  -webkit-filter: brightness(var(--page-light)); /* Chrome, Safari, Opera */
+  filter: brightness(var(--page-light));
+}

@@ -1,0 +1,60 @@
+.ant-btn {
+  flex-shrink: 0;
+}
+
+.ant-layout-content {
+  height: calc(100vh - var(--header-height));
+  padding: var(--header-tab-bar-padding-left);
+  box-sizing: border-box;
+}
+
+.ant-modal .ant-modal-title {
+  position: relative;
+  top: -4px;
+}
+
+.ant-modal .ant-btn {
+  border-radius: 3px;
+}
+
+.ant-spin-spinning {
+  max-height: 100% !important;
+}
+
+.ant-menu-submenu-popup {
+  display: none !important;
+}
+
+.ant-table-header {
+  top: 40px !important;
+}
+
+.ant-message {
+  z-index: 9999 !important;
+}
+
+.ant-spin-container .ant-table + .ant-pagination {
+  margin-top: 15px !important;
+  margin-bottom: 10px !important;
+}
+
+.ant-btn-primary {
+  background-color: #1677ff !important;
+}
+
+.ant-btn-primary.ant-btn-dangerous {
+  background-color: #ff4d4f !important;
+}
+
+.ant-switch {
+  background-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+.ant-switch.ant-switch-checked,
+.ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
+  background-color: #1677ff !important;
+}
+
+.ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: rgba(0, 0, 0, 0.45) !important;
+}

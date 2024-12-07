@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tanx.blog.mapper.ExcerptMapper">
+
+    <resultMap id="BaseResultMap" type="com.tanx.blog.entity.po.Excerpt">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,content,create_time,
+        update_time
+    </sql>
+    <select id="selectListGroup" resultType="com.tanx.blog.entity.vo.ExcerptVo">
+        select b.*
+        from (select be.id, be.content, be.create_time, be.update_time, count(chat_id) as chatNumber
+        from b_excerpt be
+        left join r_excerpt_chat rec on be.id = rec.excerpt_id
+        group by be.id, be.content, be.create_time, be.update_time) as b
+        order by b.create_time desc
+
+    </select>
+
+    <select id="selectListGroupLikeId" resultType="com.tanx.blog.entity.vo.ExcerptVo">
+        select b.* from
+        select b.*
+        from (select be.id, be.content, be.create_time, be.update_time, count(chat_id) as chatNumber
+        from b_excerpt be
+        left join r_excerpt_chat rec on be.id = rec.excerpt_id
+        group by be.id, be.content, be.create_time, be.update_time) as b
+        where locate(#{id}, id) > 0
+        order by b.create_time desc
+    </select>
+</mapper>

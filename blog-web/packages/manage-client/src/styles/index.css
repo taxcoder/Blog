@@ -1,0 +1,100 @@
+/* 初始化操作 */
+@import url('dark.css');
+@import url('antd.css');
+@import url('format.css');
+@import url('normalize.css');
+
+:root {
+  --header-height: 84px;
+  --header-tab-bar-height: 36px;
+  --header-user-height: 50px;
+  --header-tab-bar-padding-left: 10px;
+  --header-tab-bar-padding-right: 4px;
+
+  --emoji-content-width: 40px;
+  --emoji-content-height: 40px;
+  --emoji-container-width: calc(var(--emoji-content-width) * 10);
+  --emoji-container-height: calc(var(--emoji-content-height) * 7);
+}
+
+html,body {
+  width: 100% !important;
+  height: 100%;
+  }
+
+#app {
+  height: 100%;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.ant-layout-header,
+.ant-layout-sider,
+.ant-menu-submenu {
+  user-select: none !important;
+}
+
+.md-editor-icon {
+  margin: 0 auto;
+}
+
+.emoji-img {
+  width: 20px !important;
+  min-width: 20px !important;
+  position: relative !important;
+  top: -2px !important;
+  vertical-align: middle !important;
+  padding: 5px 2px !important;
+  display: inline-block !important;
+}
+
+td {
+  vertical-align: middle;
+}
+
+ul {
+  margin: 0 !important;
+}
+
+.md-editor ul {
+  list-style-type: revert !important;
+}
+
+.md-editor h2 {
+  border-bottom: 1px solid #e6e6e6;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+}
+
+.md-editor h3 {
+  margin-top: 15px;
+}
+
+.md-editor img {
+  border: none !important;
+}
+
+@media all and (max-width: 600px) {
+  .md-editor-content {
+    flex-direction: column;
+  }
+  .md-editor-input-wrapper {
+    height: calc(100% / 2);
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .md-editor-preview-wrapper {
+    margin-top: 10px;
+  }
+}
+
+.ant-select-dropdown {
+  z-index: 99999;
+}
