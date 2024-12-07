@@ -1,9 +1,0 @@
-packages:
-  # all packages in direct subdirs of packages/
-  - 'packages/*'
-  # 公共的组件
-  - 'common/**'
-  # 后端请求文件
-  - 'apis/**'
-  # 通用的工具包
-  - 'utils/**'
