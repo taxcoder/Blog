@@ -1,4 +1,13 @@
-import { createApp } from 'vue';
-import App from './App.vue';
+import { createApp } from "vue";
+import App from "./App.vue";
+import pinia from "@/store";
+import ElementPlus from "element-plus";
+import "element-plus/dist/index.css";
+import zhCn from "element-plus/lib/locale/lang/zh-cn";
 
-createApp(App).mount('#app');
+const app = createApp(App);
+app.use(ElementPlus, { locale: zhCn });
+app.use(pinia);
+app.mount("#app");
+
+export default app;
