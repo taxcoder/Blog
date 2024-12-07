@@ -1,3 +1,12 @@
+/*
+ * @Author: taxcoder 1571922819@qq.com
+ * @LastEditors: taxcoder 1571922819@qq.com
+ * @Date: 2024-12-07 12:14:20
+ * @LastEditTime: 2024-12-07 16:24:21
+ * @FilePath: /code/blog/client-web/vite.config.ts
+ * @Description: 
+ * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
+ */
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 // 导入自动导入插件
@@ -53,7 +62,7 @@ export default defineConfig({
   },
   // 跨域
   server: {
-    port: 8888,
+    port: 7777,
     // 热更新
     hmr: true,
     //自定义代理规则
