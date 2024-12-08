@@ -2,8 +2,8 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2024-12-07 16:22:33
- * @LastEditTime: 2024-12-07 16:24:47
- * @FilePath: /code/blog/client-app/vite.config.ts
+ * @LastEditTime: 2024-12-08 11:00:54
+ * @FilePath: /blog/client-app/vite.config.ts
  * @Description:
  * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
  */
@@ -13,7 +13,6 @@ import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 // 导入自动注册组件的插件
 import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import * as path from "path";
 
 // https://vite.dev/config/
@@ -31,7 +30,7 @@ export default defineConfig({
     vue(),
     AutoImport({
       //plus按需引入
-      resolvers: [ElementPlusResolver()],
+      resolvers: [],
       //引入vue 自动注册api插件
       imports: ["vue", "vue-router", "pinia"], // 配置需要自动导入的库
       dts: "types/auto-import.d.ts", // 自动引入生成api的地址
@@ -43,7 +42,7 @@ export default defineConfig({
     }),
     Components({
       //plus按需引入
-      resolvers: [ElementPlusResolver()],
+      resolvers: [],
       // 配置需要将哪些后缀类型的文件进行自动按需引入
       extensions: ["vue", "md"],
       dts: "types/components.d.ts" //自动引入生成的组件的地址
@@ -62,6 +61,7 @@ export default defineConfig({
   },
   // 跨域
   server: {
+    host: "0.0.0.0",
     port: 6666,
     // 热更新
     hmr: true

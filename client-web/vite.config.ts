@@ -16,7 +16,8 @@ export default defineConfig({
   resolve: {
     // 需要在tsconfig.json的compilerOptions中配置paths
     alias: {
-      "@": path.resolve("./src") // @代替src
+      "@": path.resolve("./src"), // @代替src
+      "element-plus": path.resolve(__dirname, "node_modules/element-plus")
     }
   },
   plugins: [
@@ -55,6 +56,7 @@ export default defineConfig({
   },
   // 跨域
   server: {
+    host: "0.0.0.0",
     port: 7777,
     // 热更新
     hmr: true
