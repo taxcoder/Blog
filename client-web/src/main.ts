@@ -1,14 +1,16 @@
-import "@/plugins/style";
+import '@/plugins/style';
 
-import { createApp } from "vue";
-import App from "./App.vue";
-import pinia from "@/store";
-import ElementPlus from "element-plus";
-import zhCn from "element-plus/lib/locale/lang/zh-cn";
+import { createApp } from 'vue';
+import App from './App.vue';
+import pinia from '@/store';
+import ElementPlus from 'element-plus';
+import zhCn from 'element-plus/lib/locale/lang/zh-cn';
 
 const app = createApp(App);
 app.use(ElementPlus, { locale: zhCn });
 app.use(pinia);
-app.mount("#app");
+app.mount('#app');
 
 export default app;
+
+console.info('>项目以halo的樱花主题为模版进行制作<');

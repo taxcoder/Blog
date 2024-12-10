@@ -7,5 +7,5 @@
  * @Description:
  * Copyright (c) 2024 by taxcoder, All Rights Reserved.
  */
-import "element-plus/dist/index.css";
-import "uno.css";
+import 'element-plus/dist/index.css';
+import 'uno.css';
