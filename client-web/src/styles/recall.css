@@ -1,0 +1,127 @@
+.recall-theme,
+.recall-theme code {
+  font-size: 0.925rem;
+  line-height: 1.5;
+  font-family: '寒蝉全圆体';
+}
+
+.recall-theme h1 {
+  display: none;
+}
+
+.recall-theme h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #404040;
+  margin: 0.625rem 0 0.625rem 0 !important;
+}
+
+.recall-theme h3 {
+  padding: 0.5rem 0;
+  font-size: 1.17rem;
+  border-bottom: 1px dashed rgba(205, 109, 109, 0.35) !important;
+}
+
+.recall-theme h3:before {
+  content: '#';
+  margin-right: 0.435rem;
+  color: #ff6d6d;
+}
+
+.recall-theme h4:before {
+  content: '';
+  margin-right: 0.435rem;
+  background: #ff6d6d;
+  width: 0.3rem;
+  height: 1.2rem;
+  display: inline-block;
+  position: relative;
+  top: 3px;
+}
+
+.recall-theme li {
+  list-style: auto !important;
+}
+
+.recall-theme blockquote {
+  position: relative;
+  margin: auto 0;
+  border-radius: 0.3125rem;
+  background-color: rgba(0, 0, 0, 0.025);
+}
+
+.recall-theme blockquote p {
+  margin: 0.3125rem 0;
+  padding: 0.625rem 0;
+}
+
+.recall-theme blockquote:before {
+  content: '';
+  display: block;
+  width: 0.3125rem;
+  height: 100%;
+  background: #ff6d6d;
+  position: absolute;
+  left: 0;
+  border-radius: 0.125rem;
+}
+
+.recall-theme figure {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.625rem 0;
+}
+
+.recall-theme figure img {
+  cursor: pointer;
+  border-radius: 0.625rem;
+  transition: transform 0.5s ease-in-out;
+}
+
+.recall-theme figure img:hover {
+  transform: translateY(-0.3125rem);
+}
+
+.recall-theme a {
+  font-weight: 700;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.recall-theme a:hover {
+  color: #2d8cf0;
+}
+.recall-theme a::after {
+  content: '';
+  width: 0;
+  height: 0.125rem;
+  position: absolute;
+  bottom: -3px;
+  background: #2d8cf0;
+  transition: width 0.3s ease-in-out;
+}
+
+.recall-theme a:hover::after {
+  width: 100%;
+}
+
+.recall-theme p {
+  margin: 0.625rem 0;
+}
+
+.recall-theme ins {
+  border-radius: 0.3rem;
+  padding: 0.3rem;
+  text-decoration: auto;
+  border: 0.0625rem solid #0000001a;
+  color: #e9546b;
+  word-break: break-word;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin: 0 0.125rem;
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <link>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      const isMobile = () => {
+        return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
+      }
+      if (isMobile()) {
+        //封装响应式像素方法,初始化单位，实现手机端1rem=100px
+        const responsivePX = () => {
+          //获取页面的宽度
+          let deviceWidth = document.documentElement.clientWidth;
+          //如果页面大于750，即px端的页面，则把html的像素锁死在100px
+          if (deviceWidth > 600) deviceWidth = 600;
+          document.documentElement.style.fontSize = deviceWidth / 22.5 + 'px';
+        }
+        // 第一次初始化像素大小
+        responsivePX();
+        // 监听窗口二次刷新像素大小
+        window.onresize = () => responsivePX();
+      }
+    </script>
+    <title>Vite + Vue + TS</title>
+  </head>
+  <body>
+    <div id="app">
+    </div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

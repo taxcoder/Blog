@@ -2,8 +2,8 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2024-12-07 13:18:37
- * @LastEditTime: 2024-12-07 13:24:10
- * @FilePath: /code/blog/web/src/router/index.ts
+ * @LastEditTime: 2024-12-20 10:56:30
+ * @FilePath: /code/blog/client-app/src/router/index.ts
  * @Description: 路由首页
  * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
  */
@@ -16,6 +16,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
   children：子路由配置数组，用于描述嵌套路由。
   meta：对象，用于存储额外的路由元数据，例如需要验证用户权限的信息。
 */
+
 const routes: Array<RouteRecordRaw> = [];
 
 const router = createRouter({

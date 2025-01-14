@@ -43,17 +43,17 @@
   },
   //  include: 指定要包含在编译中的文件
   "include": [
+    "types/**/*.d.ts",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.vue",
-    // 解决找不到模块“./xx.vue”或其它找不到模块
-    "env.d.ts",
     // pinia
     "src/store/**/*.ts",
-    // element-plus 自动注册组件
-    "src/types/**/*.d.ts",
     // 路由
-    "src/router/**/*.ts"
+    "src/router/**/*.ts",
+    "rollupOptions.config.js",
+    "src/views/category/test.js",
+    "src/common/vue-sakura/sakura.ts"
   ],
   // exclude: 指定要从编译中排除的文件
   "exclude": ["node_modules", "dist"]

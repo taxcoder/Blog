@@ -1,0 +1,5 @@
+@font-face {
+  font-family: '寒蝉全圆体';
+  src: url('@/assets/font/寒蝉全圆体.ttf') format('truetype');
+  font-display: swap;
+}

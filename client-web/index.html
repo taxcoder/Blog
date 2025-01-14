@@ -1,13 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+  <link>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue + TS</title>
+    <link rel="icon" type="image/svg+xml" href="icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"/>
+    <script>
+      const isMobile = () => {
+        let regex = /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i;
+        return navigator.userAgent.match(regex);
+      }
+      if (isMobile()) {
+        const responsivePX = () => {
+          let deviceWidth = document.documentElement.clientWidth;
+          if (deviceWidth > 768) deviceWidth = 768;
+          document.documentElement.style.fontSize = deviceWidth / 26 + 'px';
+        }
+        responsivePX();
+        window.onresize = () => responsivePX();
+      }
+    </script>
+    <script>
+      // 初始化主题
+      let theme = localStorage.getItem("theme");
+      if(!theme || !["light","dark","auto"].includes(theme)) localStorage.setItem("theme", "light")
+      document.documentElement.className = localStorage.getItem("theme");
+    </script>
+    <title>网站加载中...</title>
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="src/main.ts"></script>
   </body>
 </html>

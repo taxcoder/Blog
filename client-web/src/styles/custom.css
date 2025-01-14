@@ -1,0 +1,43 @@
+.route-active {
+  animation: active 0.5s ease-in-out forwards;
+}
+
+@keyframes active {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.el-progress-bar__outer {
+  background: none !important;
+}
+
+.el-collapse-item__content {
+  padding: 0 !important;
+}
+
+.el-message--info,
+.el-message--success,
+.el-message--error {
+  border-radius: 1.5rem;
+  padding: 0.625rem;
+}
+
+.el-message--success,
+.el-message--error {
+  padding: 0.625rem 0.9375rem;
+}
+
+.viewer-backdrop {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#nprogress .bar {
+  background-color: orange !important;
+}

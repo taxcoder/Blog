@@ -1,0 +1,74 @@
+/* 针对Webkit核心的浏览器（如Chrome、Safari） */
+@media screen and (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0.375rem;
+  }
+  ::-webkit-scrollbar-thumb {
+    /* background: var(--theme-screen-color-inner); */
+    background: transparent;
+  }
+  ::-webkit-scrollbar-track {
+    /* background: var(--theme-screen-color-outer); */
+    background: transparent;
+  }
+
+  /* 针对Firefox浏览器 */
+  scrollbar {
+    appearance: none; /* 添加标准属性 */
+    -moz-appearance: none;
+    width: 0;
+    height: 12px;
+  }
+  scrollbar-thumb {
+    background: transparent;
+    border-radius: 6px;
+  }
+  scrollbar-track {
+    background: transparent;
+  }
+
+  /* 针对IE浏览器 */
+  html {
+    scrollbar-face-color: transparent;
+    scrollbar-highlight-color: transparent;
+    scrollbar-shadow-color: transparent;
+    scrollbar-track-color: transparent;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0.375rem;
+    height: 0.375rem;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--theme-screen-color-inner);
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--theme-screen-color-outer);
+  }
+
+  /* 针对Firefox浏览器 */
+  scrollbar {
+    appearance: none; /* 添加标准属性 */
+    -moz-appearance: none;
+    width: 12px;
+    height: 12px;
+  }
+  scrollbar-thumb {
+    background: var(--theme-screen-color-inner);
+    border-radius: 6px;
+  }
+  scrollbar-track {
+    background: var(--theme-screen-color-outer);
+  }
+
+  /* 针对IE浏览器 */
+  html {
+    scrollbar-face-color: var(--theme-screen-color-inner);
+    scrollbar-highlight-color: var(--theme-screen-color-outer);
+    scrollbar-shadow-color: var(--theme-screen-color-outer);
+    scrollbar-track-color: var(--theme-screen-color-outer);
+  }
+}
