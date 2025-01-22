@@ -142,19 +142,19 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/404', name: '404', component: NotFound },
   { path: '/:pathMatch(.*)', redirect: '/404' },
   {
-    path: '/category/:id',
+    path: '/categorys/:id',
     component: CategoryInfo
   },
   {
-    path: '/tag/:id(\\d+)',
+    path: '/tags/:id(\\d+)',
     component: TagInfo
   },
   {
-    path: '/feeling/:id(\\d+)',
+    path: '/feelings/:id(\\d+)',
     component: FeelingInfo
   },
   {
-    path: '/article/:id(\\d+)',
+    path: '/articles/:id(\\d+)',
     component: Article
   }
 ];

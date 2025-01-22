@@ -27,21 +27,20 @@
     ></div>
     <div
       class="title absolute w-full top-30% left-0 color-white dark:color-[#cbcbcb] flex-cc h-[2.75rem] bg-[rgba(0,0,0)] font-size-[1.1rem]"
-      :class="{ 'transform-translate-x-[-100%]': !props.phone }"
+      :class="{ 'transform-translate-x-[-105%]': !props.phone }"
     >
       <span>{{ props.item.title }}</span>
     </div>
     <div
       class="title absolute w-full top-60% left-0 color-white flex-cc h-[2.75rem] font-size-[0.9rem] color-[#cbcbcb] dark:color-[#afafaf]"
-      :class="{ 'transform-translate-x-[100%]': !props.phone }"
+      :class="{ 'transform-translate-x-[105%]': !props.phone }"
     >
-      <span>{{ props.item.description }}</span>
+      <span class="text-center">{{ props.item.description }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps({
   item: {
     type: Object,

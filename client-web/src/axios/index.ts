@@ -2,7 +2,7 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2024-12-30 02:59:45
- * @LastEditTime: 2025-01-10 08:18:06
+ * @LastEditTime: 2025-01-15 08:50:52
  * @FilePath: /code/blog/client-web/src/axios/index.ts
  * @Description:
  * Copyright (c) 2025 by tanxiang, All Rights Reserved.
@@ -37,7 +37,10 @@ serviceAxios.interceptors.request.use(
         config.headers['content-type'] = 'application/json'; // 默认类型
       }
     }
-    console.log('请求配置：', config);
+    if (import.meta.env.VITE_NODE_ENV === 'development') {
+      console.log('请求配置：', config);
+    }
+
     return config;
   },
   (error) => {
@@ -47,7 +50,9 @@ serviceAxios.interceptors.request.use(
 
 serviceAxios.interceptors.response.use(
   (response) => {
-    console.log('响应配置：', response);
+    if (import.meta.env.VITE_NODE_ENV === 'development') {
+      console.log('响应配置：', response);
+    }
     if (response?.status === 200) {
       let data = response.data;
       return Promise.resolve(data);
@@ -107,7 +112,6 @@ serviceAxios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
 
 const request = <ResponseType = unknown>(url: string, options?: AxiosRequestConfig<unknown>): Promise<ResponseType> => {
   return new Promise((resolve, reject) => {

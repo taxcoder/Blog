@@ -2,7 +2,7 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2024-12-20 10:50:05
- * @LastEditTime: 2025-01-10 04:26:50
+ * @LastEditTime: 2025-01-15 02:46:42
  * @FilePath: /code/blog/client-web/src/views/categorys/Categorys.vue
  * @Description: 
  * Copyright (c) 2024 by tanxiang, All Rights Reserved. 
@@ -73,7 +73,7 @@ const { data, loading } = useRequest(() => getCategorys(), {
 });
 
 const toJump = (item: any) => {
-  router.push(`/category/${item.id}`);
+  router.push(`/categorys/${item.id}`);
 };
 </script>
 

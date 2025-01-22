@@ -2,7 +2,7 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2025-01-04 15:37:24
- * @LastEditTime: 2025-01-09 03:19:41
+ * @LastEditTime: 2025-01-15 02:38:28
  * @FilePath: /code/blog/client-web/src/mock/tag.ts
  * @Description:
  * Copyright (c) 2025 by tanxiang, All Rights Reserved.
@@ -75,12 +75,12 @@ for (let i = 1; i <= frontendBackendTerms.length; i++) {
 }
 
 export const tag = (mock: any) => {
-  mock.onGet('/api/tags').reply(200, {
+  mock.onGet('/tags').reply(200, {
     data: tags
   });
 
   for (let i = 1; i <= frontendBackendTerms.length; i++) {
-    mock.onGet(`/api/tag/${i}/articles?index=1&limit=10`).reply(200, {
+    mock.onGet(`/tags/${i}?index=1&limit=10`).reply(200, {
       data: {
         id: i,
         name: frontendBackendTerms[i - 1],

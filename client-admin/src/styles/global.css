@@ -1,0 +1,30 @@
+:root {
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-fmaily: math;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background-color: orange !important;
+}
+
+.n-message {
+  padding: 0.325rem 1.0625rem;
+  border-radius: 0.3rem;
+}
+
+.n-message.n-message--loading-type {
+  padding: 0.4rem 1.0625rem;
+}

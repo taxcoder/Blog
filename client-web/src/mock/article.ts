@@ -2,7 +2,7 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2025-01-04 15:35:14
- * @LastEditTime: 2025-01-11 09:57:18
+ * @LastEditTime: 2025-01-15 02:36:16
  * @FilePath: /code/blog/client-web/src/mock/article.ts
  * @Description:
  * Copyright (c) 2025 by tanxiang, All Rights Reserved.
@@ -121,7 +121,7 @@ let list = articles.list
 export const article = (mock: any) => {
   // mock模拟一个get方法的响应数据
   for (let i = 1; i <= articles.allCount / 10; i++) {
-    mock.onGet(`/api/articles?index=${i}&limit=10`).reply(200, {
+    mock.onGet(`/articles?index=${i}&limit=10`).reply(200, {
       data: {
         allCount: articles.allCount,
         list: articles.list.slice((i - 1) * 10, i * 10)
@@ -130,45 +130,42 @@ export const article = (mock: any) => {
   }
 
   for (let i = 0; i < list.length; i++) {
-    mock.onGet(`/api/articles/createTime/${list[i]}`).reply(200, {
+    mock.onGet(`/articles/years/${list[i]}`).reply(200, {
       data: articles.list
         .filter((item: any) => dateUtils.format(item.createTime, 'YYYY') == list[i])
         .sort((a, b) => b.createTime - a.createTime)
     });
   }
 
-  mock.onGet('/api/articles/years').reply(200, {
+  mock.onGet('/articles/years').reply(200, {
     data: list
   });
 
   for (let i = 1; i < articles.list.length; i++) {
-    // mock.onGet(`/api/article/${i}`).reply(500, {
-    //   message: '文章不存在！'
-    // });
-    mock.onGet(`/api/article/${i}`).reply(200, {
+    mock.onGet(`/articles/${i}`).reply(200, {
       data: articles.list.find((item: any) => item.id == i)
     });
   }
 
-  mock.onPost('/api/article/1/like').reply(200, {
+  mock.onPost('/articles/1/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/article/2/like').reply(200, {
+  mock.onPost('/articles/2/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/article/3/like').reply(200, {
+  mock.onPost('/articles/3/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/article/4/like').reply(200, {
+  mock.onPost('/articles/4/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/article/5/like').reply(200, {
+  mock.onPost('/articles/5/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/article/6/like').reply(200, {
+  mock.onPost('/articles/6/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/article/7/like').reply(200, {
+  mock.onPost('/articles/7/like').reply(200, {
     data: '点赞成功！'
   });
 };

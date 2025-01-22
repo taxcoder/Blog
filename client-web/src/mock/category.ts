@@ -7,7 +7,7 @@
  * @Description:
  * Copyright (c) 2025 by tanxiang, All Rights Reserved.
  */
-import { Category, CategoryArticle } from '@/api/categorys/category.d';
+import { Category } from '@/api/categorys/category.d';
 import { articles } from './article';
 
 const categorys: Array<Category> = [
@@ -49,12 +49,12 @@ const categorys: Array<Category> = [
 ];
 
 export const category = (mock: any) => {
-  mock.onGet('/api/categorys').reply(200, {
+  mock.onGet('/categorys').reply(200, {
     data: categorys
   });
 
   for (let i = 1; i < categorys.length; i++) {
-    mock.onGet(`/api/category/${i}/articles?index=1&limit=10`).reply(200, {
+    mock.onGet(`/categorys/${i}?index=1&limit=10`).reply(200, {
       data: {
         id: i,
         name: categorys[i].name,

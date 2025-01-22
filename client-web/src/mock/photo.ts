@@ -2,7 +2,7 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2025-01-08 03:34:39
- * @LastEditTime: 2025-01-08 13:14:47
+ * @LastEditTime: 2025-01-15 02:37:50
  * @FilePath: /code/blog/client-web/src/mock/photo.ts
  * @Description:
  * Copyright (c) 2025 by tanxiang, All Rights Reserved.
@@ -42,14 +42,14 @@ let photos: Array<Photo> = Array.from({ length: names.length }, (_, i) => {
 });
 
 export const photo = (mock: any) => {
-  mock.onGet('/api/photos/init').reply(200, {
+  mock.onGet('/photos').reply(200, {
     data: photos.map((item: Photo) => ({ id: item.id, name: item.name }))
   });
 
   let arr: Array<{ imageId: number; name: string; url: string }> = [];
   photos.map((item: Photo) => item.images).forEach((item: any) => arr.push(...item));
   for (let i = 1; i <= 4; i++) {
-    mock.onGet(`/api/photos?index=${i}&limit=30`).reply(200, {
+    mock.onGet(`/photos?index=${i}&limit=30`).reply(200, {
       data: {
         list: arr.slice((i - 1) * 30, i * 30),
         total: arr.length
@@ -58,25 +58,25 @@ export const photo = (mock: any) => {
   }
 
   for (let i = 0; i <= 3; i++) {
-    mock.onGet(`/api/photo/${photos[i].id}?index=1&limit=30`).reply(200, {
+    mock.onGet(`/photos/${photos[i].id}?index=1&limit=30`).reply(200, {
       data: {
         list: photos[i].images.slice(0, 30),
         total: photos[i].images.length
       }
     });
-    mock.onGet(`/api/photo/${photos[i].id}?index=2&limit=30`).reply(200, {
+    mock.onGet(`/photos/${photos[i].id}?index=2&limit=30`).reply(200, {
       data: {
         list: photos[i].images.slice(30, 60),
         total: photos[i].images.length
       }
     });
-    mock.onGet(`/api/photo/${photos[i].id}?index=3&limit=30`).reply(200, {
+    mock.onGet(`/photos/${photos[i].id}?index=3&limit=30`).reply(200, {
       data: {
         list: photos[i].images.slice(60, 90),
         total: photos[i].images.length
       }
     });
-    mock.onGet(`/api/photo/${photos[i].id}?index=4&limit=30`).reply(200, {
+    mock.onGet(`/photos/${photos[i].id}?index=4&limit=30`).reply(200, {
       data: {
         list: photos[i].images.slice(90, 120),
         total: photos[i].images.length

@@ -2,7 +2,7 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2025-01-02 09:59:41
- * @LastEditTime: 2025-01-11 09:19:47
+ * @LastEditTime: 2025-01-15 02:51:37
  * @FilePath: /code/blog/client-web/src/components/articles-list/PcContent.vue
  * @Description:
  * Copyright (c) 2025 by tanxiang, All Rights Reserved. 
@@ -89,7 +89,7 @@ const timeToStr = (time: number) => {
 };
 
 const toJump = () => {
-  router.push(`/category/${props.content.category.id}`);
+  router.push(`/categorys/${props.content.category.id}`);
 };
 
 const setOrder = computed(() => {

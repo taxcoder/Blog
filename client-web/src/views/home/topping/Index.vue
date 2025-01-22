@@ -2,7 +2,7 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2024-12-31 10:58:06
- * @LastEditTime: 2025-01-14 07:11:05
+ * @LastEditTime: 2025-01-15 02:49:45
  * @FilePath: /code/blog/client-web/src/views/home/topping/Index.vue
  * @Description: 
  * Copyright (c) 2024 by tanxiang, All Rights Reserved. 
@@ -61,7 +61,7 @@ const props = defineProps({
 });
 
 const toJump = (id: number) => {
-  router.push('/article/' + id);
+  router.push('/articles/' + id);
 };
 
 const setGridCols = computed(() => {

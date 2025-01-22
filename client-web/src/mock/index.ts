@@ -37,7 +37,7 @@ const initMock = () => {
   topping(mock);
   photo(mock);
 
-  mock.onGet('/api/info').reply(200, {
+  mock.onGet('/info').reply(200, {
     data: {
       avatar: 'https://avatars.githubusercontent.com/u/1571922819?v=4',
       strings: ['Hello World!', 'stranger', 'I am a programmer!'],

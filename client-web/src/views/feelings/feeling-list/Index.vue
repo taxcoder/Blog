@@ -62,7 +62,7 @@
         <el-button color="#000" size="small" class="min-h-[1.5rem] rounded-[0.3125rem]" @click="buttonClick()">
           <icon-message-one theme="outline" size="0.8rem" fill="#fff" class="relative top-[0.0625rem]" />
           <span class="font-size-[0.95rem] color-[#fff] ml-[0.25rem]">
-            <span class="artalk-comment-count" :data-page-key="`/feeling/${props.feeling.id}`"> </span>
+            <span class="artalk-comment-count" :data-page-key="`/feeling/${props.feeling.id}`">0</span>
           </span>
         </el-button>
       </div>

@@ -28,10 +28,10 @@ const toPage = () => {
   <div class="buttons">
     <a href="#" class="button" @click="toPage">
       <span class="button__text"> {{ props.content }} </span>
-      <img src="@/assets/img/button/cone.png" alt="" class="button__cone" />
-      <img src="@/assets/img/button/torus.png" alt="" class="button__torus" />
-      <img src="@/assets/img/button/icosahedron.png" alt="" class="button__icosahedron" />
-      <img src="@/assets/img/button/sphere.png" alt="" class="button__sphere" />
+      <img src="@/assets/img/button/cone.webp" alt="" class="button__cone" />
+      <img src="@/assets/img/button/torus.webp" alt="" class="button__torus" />
+      <img src="@/assets/img/button/icosahedron.webp" alt="" class="button__icosahedron" />
+      <img src="@/assets/img/button/sphere.webp" alt="" class="button__sphere" />
     </a>
   </div>
 </template>

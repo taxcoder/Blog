@@ -2,7 +2,7 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2025-01-01 10:25:02
- * @LastEditTime: 2025-01-14 03:34:37
+ * @LastEditTime: 2025-01-15 02:47:01
  * @FilePath: /code/blog/client-web/src/components/articles-list/Index.vue
  * @Description: 首页文章列表
  * Copyright (c) 2025 by tanxiang, All Rights Reserved. 
@@ -108,7 +108,7 @@ const request = useRequest(() => props.activeFunction(index.value, limit.value),
 
 const toJump = (id: number) => {
   // 跳转到文章详情页
-  router.push(`/article/${id}`);
+  router.push(`/articles/${id}`);
 };
 
 const onload = () => {

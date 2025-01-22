@@ -84,7 +84,7 @@ const timeToStr = (time: number) => {
 };
 
 const toJump = () => {
-  router.push(`/categorys/${props.content.category.name}`);
+  router.push(`/categorys/${props.content.category.id}`);
 };
 </script>
 

@@ -121,24 +121,6 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 7777,
     // 热更新
-    hmr: true,
-    //自定义代理规则
-    proxy: {
-      // 本地开发环境通过代理实现跨域，生产环境使用 nginx 转发
-      // 正则表达式写法
-      '^/api': {
-        target: 'http://code.recall.ttop/8888', // 后端服务实际地址
-        changeOrigin: true, //开启代理
-        configure: (proxy) => {
-          // 解决请求403问题：invalid CORS request。非常重要的代码！！
-          proxy.on('proxyReq', function (proxyReq) {
-            proxyReq.removeHeader('referer'); // 移除请求头
-            proxyReq.removeHeader('origin'); // 移除请求头
-          });
-        },
-        // path是请求方法axios配置的baseUr中去除 协议+域名+端口 剩下的部分。例如http://127.0.0.1:9000/api，这里的path就是/api
-        rewrite: (path) => path.replace(/^\/api/, '') // 路径重写
-      }
-    }
+    hmr: true
   }
 });

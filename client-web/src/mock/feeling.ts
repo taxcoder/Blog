@@ -2,7 +2,7 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2025-01-04 15:41:10
- * @LastEditTime: 2025-01-09 09:27:56
+ * @LastEditTime: 2025-01-15 02:37:02
  * @FilePath: /code/blog/client-web/src/mock/feeling.ts
  * @Description:
  * Copyright (c) 2025 by tanxiang, All Rights Reserved.
@@ -41,7 +41,7 @@ for (let i = 1; i <= feelings.allCount; i++) {
 
 export const feeling = (mock: any) => {
   for (let i = 1; i <= Math.ceil(feelings.allCount / 10); i++) {
-    mock.onGet(`/api/feelings?index=${i}&limit=10`).reply(200, {
+    mock.onGet(`/feelings?index=${i}&limit=10`).reply(200, {
       data: {
         allCount: feelings.allCount,
         list: feelings.list.slice((i - 1) * 10, i * 10)
@@ -50,30 +50,30 @@ export const feeling = (mock: any) => {
   }
 
   for (let i = 1; i <= feelings.list.length; i++) {
-    mock.onGet(`/api/feeling/${i}`).reply(200, {
+    mock.onGet(`/feelings/${i}`).reply(200, {
       data: feelings.list.find((item: any) => item.id == i)
     });
   }
 
-  mock.onPost('/api/feelings/1/like').reply(200, {
+  mock.onPost('/feelings/1/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/feelings/2/like').reply(200, {
+  mock.onPost('/feelings/2/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/feelings/3/like').reply(200, {
+  mock.onPost('/feelings/3/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/feelings/4/like').reply(200, {
+  mock.onPost('/feelings/4/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/feelings/5/like').reply(200, {
+  mock.onPost('/feelings/5/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/feelings/6/like').reply(200, {
+  mock.onPost('/feelings/6/like').reply(200, {
     data: '点赞成功！'
   });
-  mock.onPost('/api/feelings/7/like').reply(200, {
+  mock.onPost('/feelings/7/like').reply(200, {
     data: '点赞成功！'
   });
 };

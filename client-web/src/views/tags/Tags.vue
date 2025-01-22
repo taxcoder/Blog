@@ -2,7 +2,7 @@
  * @Author: taxcoder 1571922819@qq.com
  * @LastEditors: taxcoder 1571922819@qq.com
  * @Date: 2024-12-20 10:49:49
- * @LastEditTime: 2025-01-09 06:12:43
+ * @LastEditTime: 2025-01-15 02:46:31
  * @FilePath: /code/blog/client-web/src/views/tags/Tags.vue
  * @Description: 
  * Copyright (c) 2024 by tanxiang, All Rights Reserved. 
@@ -43,7 +43,7 @@ const { data, loading } = useRequest(() => api.getTags(), {
 });
 
 const toJump = (item: any) => {
-  router.push(`/tag/${item.id}`);
+  router.push(`/tags/${item.id}`);
 };
 </script>
 
